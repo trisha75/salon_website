@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KITTU'S THE SALON | Gopi Krishna</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    
+    <style>
+        :root {
+            --gold: #c5a86b;
+            --gold-light: #e2d1b3;
+            --dark: #1c1b18;
+            --bg-ivory: #fcfbfa;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-ivory);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Core Animation Engine Mechanics */
+        .slide-reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .slide-reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-reveal-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .slide-reveal-left.active,
+        .slide-reveal-right.active,
+        .fade-reveal-up.active {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
+        @keyframes kenburnsEffect {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+            100% { transform: scale(1); }
+        }
+        .animate-kenburns {
+            animation: kenburnsEffect 20s ease-in-out infinite;
+        }
+
+        @keyframes premiumFloat {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: premiumFloat 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="fixed w-full z-40 bg-white/80 backdrop-blur-xl border-b border-stone-200/60 px-6 md:px-16 py-5 flex justify-between items-center transition-all duration-300">
+        <div class="text-2xl font-bold tracking-tighter uppercase text-stone-900">
+            KITTU'S <span class="text-[#c5a86b] font-light">SALON</span>
+        </div>
+        
+        <div class="hidden lg:flex space-x-12 text-[10px] uppercase font-bold tracking-[0.3em] text-stone-500">
+            <a href="#home" class="hover:text-[#c5a86b] transition-colors duration-300">Home</a>
+            <a href="#services" class="hover:text-[#c5a86b] transition-colors duration-300">Services</a>
+            <a href="#about" class="hover:text-[#c5a86b] transition-colors duration-300">About Salon</a>
+            <a href="#gallery" class="hover:text-[#c5a86b] transition-colors duration-300">Gallery</a>
+            <a href="#reviews" class="hover:text-[#c5a86b] transition-colors duration-300">Reviews</a>
+            <a href="#contact" class="hover:text-[#c5a86b] transition-colors duration-300">Location</a>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <button onclick="openBookingModal()" class="bg-[#1c1b18] text-white px-7 py-3 text-[10px] uppercase font-bold tracking-widest hover:bg-[#c5a86b] hover:text-white transition-all duration-500 rounded-none shadow-sm cursor-pointer">
+                Book Appointment
+            </button>
+        </div>
+    </nav>
+
+    <header id="home" class="relative h-[90vh] w-full overflow-hidden flex items-center justify-center text-center">
+        <div class="absolute inset-0 z-0">
+            <img src="wallpaper.jpg" alt="Kittu's Salon Background" class="w-full h-full object-cover object-center animate-kenburns opacity-15">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+        </div>
+        
+        <div class="relative z-10 px-6 max-w-4xl mx-auto text-white">
+            <span class="text-[11px] uppercase tracking-[0.5em] text-[#e2d1b3] block mb-6 font-semibold animate-pulse">
+                Professional Men's Grooming Studio
+            </span>
+            <h1 class="serif text-5xl md:text-8xl font-light leading-none tracking-tight mb-8">
+                KITTU'S THE SALON
+            </h1>
+            <div class="w-24 h-[1px] bg-[#c5a86b] mx-auto mb-8"></div>
+            <p class="text-stone-200/90 text-base md:text-xl font-light tracking-wide max-w-xl mx-auto mb-4">
+                Get the perfect look styled by <span class="text-[#e2d1b3] font-normal">Gopi Krishna</span>. Friendly service and clean styling for MEN'S.
+            </p>
+            <p class="text-[#e2d1b3] text-xs uppercase tracking-[0.2em] font-medium mb-12">
+                Timings: 7:30 AM - 9:30 PM Everyday | Walk-ins & Bookings Welcome
+            </p>
+            <div class="flex justify-center">
+                <button onclick="openBookingModal()" class="border border-white/40 px-12 py-4 text-[10px] uppercase font-bold tracking-[0.2em] text-white hover:bg-white hover:text-black transition-all duration-500 bg-black/10 backdrop-blur-sm cursor-pointer">
+                    View Our Services
+                </button>
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center opacity-70">
+            <span class="text-[9px] uppercase tracking-widest text-white mb-2">Scroll</span>
+            <div class="w-[1px] h-12 bg-gradient-to-b from-white to-transparent animate-bounce"></div>
+        </div>
+    </header>
+
+    <section id="services" class="py-28 px-6 md:px-16 bg-stone-50 border-b border-stone-200/50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-24 max-w-2xl mx-auto">
+                <span class="text-[10px] uppercase tracking-[0.4em] text-[#c5a86b] font-bold block mb-4">What We Do</span>
+                <h2 class="serif text-4xl md:text-6xl text-stone-900 font-light">Our Services</h2>
+                <p class="text-stone-500 text-xs font-light tracking-wide mt-4">Choose from our main menu of grooming options below.</p>
+                <div class="w-12 h-[1px] bg-stone-300 mx-auto mt-6"></div>
+            </div>
+
+            <div class="w-full overflow-x-auto hide-scrollbar pb-8">
+                <div class="flex flex-row flex-nowrap justify-between items-stretch w-full min-w-[1100px] gap-6">
+                    
+                    <div onclick="openBookingModal('Hair Cut')" class="slide-reveal-left flex-1 bg-white border border-stone-200/80 p-8 text-center flex flex-col items-center justify-between transition-all duration-500 hover:border-[#c5a86b] hover:shadow-xl hover:-translate-y-2 group cursor-pointer">
+                        <div class="w-16 h-16 flex items-center justify-center text-[#c5a86b] mb-6 transition-transform duration-500 group-hover:scale-110">
+                            <svg class="w-10 h-10 stroke-current fill-none stroke-1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7.5a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm0 0v5.25m0-5.25h12m0 0a2.25 2.25 0 114.5 0 2.25 2.25 0 01-4.5 0zm0 0v5.25m-12 0A2.25 2.25 0 106 18a2.25 2.25 0 00-4.5 0zm0 0H12m6-5.25v5.25m0 0a2.25 2.25 0 104.5 0 2.25 2.25 0 00-4.5 0z"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xs uppercase font-bold tracking-widest text-stone-800 mb-2">Hair Cut</h3>
+                            <p class="text-[11px] text-stone-400 font-light leading-relaxed">Clean and neat haircuts tailored exactly to your style preference.</p>
+                        </div>
+                    </div>
+
+                    <div onclick="openBookingModal('Beard Design')" class="slide-reveal-left flex-1 bg-white border border-stone-200/80 p-8 text-center flex flex-col items-center justify-between transition-all duration-500 hover:border-[#c5a86b] hover:shadow-xl hover:-translate-y-2 group cursor-pointer" style="transition-delay: 100ms;">
+                        <div class="w-16 h-16 flex items-center justify-center text-[#c5a86b] mb-6 transition-transform duration-500 group-hover:scale-110">
+                            <svg class="w-10 h-10 stroke-current fill-none stroke-1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xs uppercase font-bold tracking-widest text-stone-800 mb-2">Beard Design</h3>
+                            <p class="text-[11px] text-stone-400 font-light leading-relaxed">Sharp beard shaving and trimming with a hot towel finish.</p>
+                        </div>
+                    </div>
+
+                    <div onclick="openBookingModal('Facial Therapy')" class="slide-reveal-left flex-1 bg-white border border-stone-200/80 p-8 text-center flex flex-col items-center justify-between transition-all duration-500 hover:border-[#c5a86b] hover:shadow-xl hover:-translate-y-2 group cursor-pointer" style="transition-delay: 200ms;">
+                        <div class="w-16 h-16 flex items-center justify-center text-[#c5a86b] mb-6 transition-transform duration-500 group-hover:scale-110">
+                            <svg class="w-10 h-10 stroke-current fill-none stroke-1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xs uppercase font-bold tracking-widest text-stone-800 mb-2">Facial Therapy</h3>
+                            <p class="text-[11px] text-stone-400 font-light leading-relaxed">Relaxing facial treatments to clean and refresh your skin.</p>
+                        </div>
+                    </div>
+
+                    <div onclick="openBookingModal('Face Scrub')" class="slide-reveal-right flex-1 bg-white border border-stone-200/80 p-8 text-center flex flex-col items-center justify-between transition-all duration-500 hover:border-[#c5a86b] hover:shadow-xl hover:-translate-y-2 group cursor-pointer" style="transition-delay: 300ms;">
+                        <div class="w-16 h-16 flex items-center justify-center text-[#c5a86b] mb-6 transition-transform duration-500 group-hover:scale-110">
+                            <svg class="w-10 h-10 stroke-current fill-none stroke-1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 21l5.096-.813a8.959 8.959 0 005.105-2.228l2.228-2.228a1.8 1.8 0 000-2.546l-3.41-3.41a1.8 1.8 0 00-2.546 0l-2.228 2.228a8.959 8.959 0 00-2.228 5.105zM3.662 12.458a14.2 14.2 0 004.054 4.054M4.747 4.747a14.2 14.2 0 004.914 2.185"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xs uppercase font-bold tracking-widest text-stone-800 mb-2">Face Scrub</h3>
+                            <p class="text-[11px] text-stone-400 font-light leading-relaxed">Gentle face scrubbing to remove dirt and brighten up your face.</p>
+                        </div>
+                    </div>
+
+                    <div onclick="openBookingModal('Hair Spa')" class="slide-reveal-right flex-1 bg-white border border-stone-200/80 p-8 text-center flex flex-col items-center justify-between transition-all duration-500 hover:border-[#c5a86b] hover:shadow-xl hover:-translate-y-2 group cursor-pointer" style="transition-delay: 400ms;">
+                        <div class="w-16 h-16 flex items-center justify-center text-[#c5a86b] mb-6 transition-transform duration-500 group-hover:scale-110">
+                            <svg class="w-10 h-10 stroke-current fill-none stroke-1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m9-9H3M12 5.25a6.75 6.75 0 016.75 6.75H12V5.25zM12 18.75A6.75 6.75 0 015.25 12H12v6.75z"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xs uppercase font-bold tracking-widest text-stone-800 mb-2">Hair Spa</h3>
+                            <p class="text-[11px] text-stone-400 font-light leading-relaxed">Nourishing hair cream and steam treatments for healthy hair.</p>
+                        </div>
+                    </div>
+
+                    <div onclick="openBookingModal('Head Wash')" class="slide-reveal-right flex-1 bg-white border border-stone-200/80 p-8 text-center flex flex-col items-center justify-between transition-all duration-500 hover:border-[#c5a86b] hover:shadow-xl hover:-translate-y-2 group cursor-pointer" style="transition-delay: 500ms;">
+                        <div class="w-16 h-16 flex items-center justify-center text-[#c5a86b] mb-6 transition-transform duration-500 group-hover:scale-110">
+                            <svg class="w-10 h-10 stroke-current fill-none stroke-1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xs uppercase font-bold tracking-widest text-stone-800 mb-2">Head Wash</h3>
+                            <p class="text-[11px] text-stone-400 font-light leading-relaxed">Thorough hair wash with premium shampoo and comfortable styling.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-32 px-6 md:px-16 relative bg-stone-900 text-white overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="book.jpg" alt="Salon Background Background Texture" class="w-full h-full object-cover object-top opacity-15 mix-blend-overlay">
+            <div class="absolute inset-0 bg-stone-950/40"></div>
+        </div>
+
+        <div class="max-w-5xl mx-auto relative z-10 grid md:grid-cols-12 gap-16 items-center">
+            <div class="md:col-span-7 slide-reveal-left">
+                <span class="text-[10px] uppercase tracking-[0.4em] text-[#c5a86b] font-bold block mb-4">About Our Salon</span>
+                <h2 class="serif text-4xl md:text-6xl font-light mb-8 leading-tight">Welcome to <br>Kittu's Salon</h2>
+                <p class="text-stone-300 font-light leading-relaxed mb-6 text-sm md:text-base">
+                    Welcome to Kittu's Salon in Jaggayyapeta. Run by hair specialist <strong class="text-white font-medium">Gopi Krishna</strong>, we offer excellent grooming and haircutting services to keep you looking your best every day.
+                </p>
+                <p class="text-stone-400 font-light leading-relaxed text-xs md:text-sm mb-4">
+                    Our salon is open daily from **7:30 AM to 9:30 PM**. We focus heavily on clean tools, friendly service, and making sure every customer gets exactly the haircut they want.
+                </p>
+                <p class="text-stone-400 font-light leading-relaxed text-xs md:text-sm">
+                    Whether you are getting ready for a wedding, an important day, or just need a quick trim, Gopi Krishna is here to give you a great look with care and attention.
+                </p>
+            </div>
+            
+            <div class="md:col-span-5 fade-reveal-up bg-stone-950/80 border border-stone-800 p-8 md:p-10 backdrop-blur-md">
+                <h4 class="text-xs uppercase font-bold tracking-[0.2em] text-[#c5a86b] mb-8 border-b border-stone-800 pb-4">Our Features</h4>
+                <ul class="space-y-6 text-xs uppercase tracking-widest font-semibold text-stone-300">
+                    <li class="flex items-center gap-4"><span class="text-[#c5a86b] text-sm">✦</span> Experienced Barber</li>
+                    <li class="flex items-center gap-4"><span class="text-[#c5a86b] text-sm">✦</span> Quality Products</li>
+                    <li class="flex items-center gap-4"><span class="text-[#c5a86b] text-sm">✦</span> Clean & Safe Tools</li>
+                    <li class="flex items-center gap-4"><span class="text-[#c5a86b] text-sm">✦</span> Open 7:30 AM - 9:30 PM</li>
+                    <li class="flex items-center gap-4"><span class="text-[#c5a86b] text-sm">✦</span> Easy WhatsApp Booking</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-32 bg-white">
+        <div class="max-w-5xl mx-auto px-6 mb-24 text-center">
+            <span class="text-[10px] uppercase tracking-[0.4em] text-[#c5a86b] font-bold block mb-4">Our Space</span>
+            <h2 class="serif text-4xl md:text-6xl text-stone-900 font-light">Salon Photos</h2>
+            <div class="w-12 h-[1px] bg-stone-200 mx-auto mt-6"></div>
+        </div>
+
+        <div class="max-w-5xl mx-auto px-6 space-y-32">
+            
+            <div class="grid md:grid-cols-12 gap-8 md:gap-16 items-center">
+                <div class="md:col-span-6 overflow-hidden bg-stone-50 aspect-[4/3] border-2 border-[#c5a86b]/40 shadow-xl slide-reveal-left p-1">
+                    <img src="1.jpg" alt="Exterior View" class="w-full h-full object-cover object-center transition-transform duration-[1.2s] hover:scale-103">
+                </div>
+                <div class="md:col-span-6 space-y-4 p-4 slide-reveal-right">
+                    <span class="text-[#c5a86b] text-[10px] uppercase tracking-[0.3em] font-bold block">🚨 Shop View</span>
+                    <h3 class="serif text-3xl md:text-4xl text-stone-900 font-light italic">Exterior View</h3>
+                    <p class="text-stone-500 font-light text-sm leading-relaxed">
+                        This is the outside look of our salon on Kodad Road. Look for our sign when you come visit us for your next haircut!
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-12 gap-8 md:gap-16 items-center">
+                <div class="md:col-span-6 md:order-2 overflow-hidden bg-stone-50 aspect-[4/3] border-2 border-[#c5a86b]/40 shadow-xl slide-reveal-right p-1">
+                    <img src="4.jpg" alt="Interior View" class="w-full h-full object-cover object-center transition-transform duration-[1.2s] hover:scale-103">
+                </div>
+                <div class="md:col-span-6 md:order-1 space-y-4 p-4 text-left md:text-right slide-reveal-left">
+                    <span class="text-[#c5a86b] text-[10px] uppercase tracking-[0.3em] font-bold block">🚨 Inside Look</span>
+                    <h3 class="serif text-3xl md:text-4xl text-stone-900 font-light italic">Interior View</h3>
+                    <p class="text-stone-500 font-light text-sm leading-relaxed">
+                        A clean, well-lit inside view of our salon setup. We keep comfortable chairs and clean mirrors ready for your service.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-12 gap-8 md:gap-16 items-center">
+                <div class="md:col-span-6 overflow-hidden bg-stone-50 aspect-[4/3] border-2 border-[#c5a86b]/40 shadow-xl slide-reveal-left p-1">
+                    <img src="7.jpg" alt="Friendly Atmosphere View" class="w-full h-full object-cover object-center transition-transform duration-[1.2s] hover:scale-103">
+                </div>
+                <div class="md:col-span-6 space-y-4 p-4 slide-reveal-right">
+                    <span class="text-[#c5a86b] text-[10px] uppercase tracking-[0.3em] font-bold block">🚨 Friendly Atmosphere Sense</span>
+                    <h3 class="serif text-3xl md:text-4xl text-stone-900 font-light italic">With Friends</h3>
+                    <p class="text-stone-500 font-light text-sm leading-relaxed">
+                        We enjoy a friendly atmosphere here where clients feel right at home. Come over with friends, hang out, and get styled together.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-12 gap-8 md:gap-16 items-center">
+                <div class="md:col-span-6 md:order-2 overflow-hidden bg-stone-50 aspect-square border-2 border-[#c5a86b]/40 shadow-xl slide-reveal-right p-1 max-w-sm mx-auto">
+                    <img src="5.jpg" alt="Salon Logo" class="w-full h-full object-contain object-center transition-transform duration-[1.2s] hover:scale-103">
+                </div>
+                <div class="md:col-span-6 md:order-1 space-y-4 p-4 text-left md:text-right slide-reveal-left">
+                    <span class="text-[#c5a86b] text-[10px] uppercase tracking-[0.3em] font-bold block">🚨 Our Identity</span>
+                    <h3 class="serif text-3xl md:text-4xl text-stone-900 font-light italic">Logo</h3>
+                    <p class="text-stone-500 font-light text-sm leading-relaxed">
+                        Our official salon emblem. Look for this logo on our shopfront for authentic grooming by Gopi Krishna.
+                    </p>
+                </div>
+            </div>
+
+            <div class="pt-16 border-t border-stone-100">
+                <span class="text-[10px] uppercase tracking-[0.4em] text-[#c5a86b] font-bold block mb-8 text-center">More Gallery Photos</span>
+                <div class="grid grid-cols-2 sm:grid-cols-5 gap-4">
+                    <div class="aspect-square bg-stone-50 overflow-hidden border border-stone-200/50"><img src="2.jpg" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square bg-stone-50 overflow-hidden border border-stone-200/50"><img src="3.jpg" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square bg-stone-50 overflow-hidden border border-stone-200/50"><img src="6.jpg" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square bg-stone-50 overflow-hidden border border-stone-200/50"><img src="9.jpg" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square bg-stone-50 overflow-hidden border border-stone-200/50"><img src="8.jpg" class="w-full h-full object-cover"></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="py-16 bg-stone-50 border-b border-stone-200/40 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <span class="text-[9px] uppercase tracking-[0.3em] text-stone-400 font-bold block mb-8">Products We Use</span>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 items-center justify-items-center opacity-40 grayscale contrast-200">
+                <span class="text-stone-900 font-serif font-bold text-lg tracking-widest">L'ORÉAL PRO</span>
+                <span class="text-stone-900 font-sans font-black text-xl tracking-tighter">WAHL</span>
+                <span class="text-stone-900 font-serif italic text-xl">Schwarzkopf</span>
+                <span class="text-stone-900 font-sans font-bold text-lg tracking-widest">MATRIX</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="py-28 px-6 md:px-16 bg-stone-50 border-b border-stone-200/50">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid lg:grid-cols-12 gap-16 items-center">
+                
+                <div class="lg:col-span-5 text-center lg:text-left slide-reveal-left flex flex-col items-center lg:items-start">
+                    <span class="text-[10px] uppercase tracking-[0.4em] text-[#c5a86b] font-bold block mb-4">Customer Reviews</span>
+                    <h2 class="serif text-4xl md:text-5xl text-stone-900 font-light mb-6">Google Reviews</h2>
+                    
+                    <div class="bg-white border border-stone-200 p-6 w-full max-w-sm rounded-none shadow-sm flex items-center justify-between mb-8">
+                        <div class="text-left">
+                            <div class="text-4xl font-bold text-stone-900 leading-none mb-1">4.9</div>
+                            <div class="flex text-amber-400 text-lg tracking-tighter">★★★★★</div>
+                        </div>
+                        <div class="text-right border-l border-stone-200 pl-6">
+                            <div class="text-xs font-bold uppercase tracking-wider text-stone-800">100% Real</div>
+                            <div class="text-[11px] text-stone-400 mt-0.5">Google Maps Reviews</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-stone-200 p-8 text-center max-w-sm w-full shadow-sm hover:border-[#c5a86b] transition-all duration-500 group">
+                        <div class="w-44 h-44 mx-auto mb-6 bg-stone-50 border border-stone-100 flex items-center justify-center p-2 relative overflow-hidden">
+                            <img src="10.jpg" alt="Google Review QR Code" class="w-full h-full object-contain object-center transition-transform duration-500 group-hover:scale-102">
+                        </div>
+                        <h4 class="text-xs uppercase font-bold tracking-widest text-stone-800 mb-2">Scan to Review</h4>
+                        <p class="text-[11px] text-stone-400 font-light leading-relaxed px-4">
+                            Scan this QR code with your phone to view or leave us a review on Google Maps.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 flex flex-col gap-6 fade-reveal-up">
+                    <div class="bg-white border border-stone-200 p-8 shadow-sm hover:shadow-md transition-all duration-500 border-l-4 border-l-[#c5a86b]">
+                        <div class="flex justify-between items-center mb-4">
+                            <h4 class="text-xs uppercase font-bold tracking-widest text-stone-800">Vamsi Krishna</h4>
+                            <span class="text-amber-400 text-sm">★★★★★</span>
+                        </div>
+                        <p class="text-stone-500 font-light text-sm italic leading-relaxed">
+                            "The best salon in Jaggayyapeta. Gopi Krishna cuts hair perfectly and gives great style advice. Highly recommended."
+                        </p>
+                        <span class="text-[10px] text-stone-300 uppercase tracking-widest block mt-4 font-medium">Regular Customer</span>
+                    </div>
+
+                    <div class="bg-white border border-stone-200 p-8 shadow-sm hover:shadow-md transition-all duration-500 border-l-4 border-l-[#c5a86b]">
+                        <div class="flex justify-between items-center mb-4">
+                            <h4 class="text-xs uppercase font-bold tracking-widest text-stone-800">Sandeep G.</h4>
+                            <span class="text-amber-400 text-sm">★★★★★</span>
+                        </div>
+                        <p class="text-stone-500 font-light text-sm italic leading-relaxed">
+                            "Very clean shop and good service. The razor lining for my beard was perfectly neat and sharp."
+                        </p>
+                        <span class="text-[10px] text-stone-300 uppercase tracking-widest block mt-4 font-medium">Regular Customer</span>
+                    </div>
+
+                    <div class="bg-white border border-stone-200 p-8 shadow-sm hover:shadow-md transition-all duration-500 border-l-4 border-l-[#c5a86b]">
+                        <div class="flex justify-between items-center mb-4">
+                            <h4 class="text-xs uppercase font-bold tracking-widest text-stone-800">Rahul M.</h4>
+                            <span class="text-amber-400 text-sm">★★★★★</span>
+                        </div>
+                        <p class="text-stone-500 font-light text-sm italic leading-relaxed">
+                            "Kittu's Salon is perfect for Jaggayyapeta. They manage appointments nicely and the face scrub service is very refreshing."
+                        </p>
+                        <span class="text-[10px] text-stone-300 uppercase tracking-widest block mt-4 font-medium">Regular Customer</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-6 md:px-16 bg-white border-b border-stone-200/50">
+        <div class="max-w-3xl mx-auto">
+            <h3 class="serif text-3xl text-center text-stone-900 font-light mb-12">Salon Policy & FAQs</h3>
+            
+            <div class="space-y-4 text-sm font-light">
+                <div class="border border-stone-200 p-5 bg-stone-50/50">
+                    <h5 class="font-bold text-stone-800 text-xs uppercase tracking-wider mb-2">Q: Should I book an appointment?</h5>
+                    <p class="text-stone-500 leading-relaxed text-xs">Walk-ins are always welcome, but booking in advance helps ensure you get a slot right away without waiting.</p>
+                </div>
+                <div class="border border-stone-200 p-5 bg-stone-50/50">
+                    <h5 class="font-bold text-stone-800 text-xs uppercase tracking-wider mb-2">Q: What if I am running late?</h5>
+                    <p class="text-stone-500 leading-relaxed text-xs">We hold appointments for 10 minutes. If you are later than that, we will try to fit you into the next open walk-in spot.</p>
+                </div>
+                <div class="border border-stone-200 p-5 bg-stone-50/50">
+                    <h5 class="font-bold text-stone-800 text-xs uppercase tracking-wider mb-2">Q: Do you accept UPI digital payments?</h5>
+                    <p class="text-stone-500 leading-relaxed text-xs">Yes, we fully accept GooglePay, PhonePe, Paytm, and cash payments at the counter.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="bg-[#1c1b18] text-white pt-24 pb-12 px-6 md:px-16 border-t border-stone-800 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 lg:grid-cols-12 gap-16 border-b border-stone-800 pb-20 mb-12">
+                
+                <div class="lg:col-span-4 slide-reveal-left">
+                    <h3 class="text-2xl font-bold tracking-tighter uppercase mb-6">
+                        KITTU'S <span class="text-[#c5a86b] font-light">SALON</span>
+                    </h3>
+                    <p class="text-stone-400 font-light text-sm leading-relaxed mb-8 max-w-sm">
+                        Great quality haircuts and grooming styles for men. Friendly service every time you visit.
+                    </p>
+                    <div class="flex flex-col gap-2">
+                        <span class="text-[10px] text-stone-500 uppercase tracking-widest block">Salon Owner</span>
+                        <span class="serif text-xl text-[#e2d1b3] tracking-wide font-light">Gopi Krishna</span>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-4 fade-reveal-up">
+                    <h4 class="text-[10px] uppercase font-bold tracking-[0.3em] text-[#c5a86b] mb-8">Contact & Address</h4>
+                    <div class="space-y-4 text-sm font-light">
+                        <div>
+                            <span class="text-stone-500 text-xs block mb-0.5">Phone & UPI Number</span>
+                            <a href="tel:+916304656255" class="text-[#e2d1b3] font-medium text-base hover:underline">+91 63046 56255</a>
+                        </div>
+                        <div>
+                            <span class="text-stone-500 text-xs block mb-0.5">Shop Timings</span>
+                            <p class="text-stone-300">7:30 AM — 9:30 PM (Open Everyday)</p>
+                        </div>
+                        <div>
+                            <span class="text-stone-500 text-xs block mb-0.5">Address Location</span>
+                            <p class="text-stone-300 text-xs leading-relaxed">
+                                Kodad Road, Jaggayyapet, Andhra Pradesh, 521175
+                            </p>
+                        </div>
+                        <div>
+                            <span class="text-stone-500 text-xs block mb-1">Follow Us</span>
+                            <div class="flex flex-col gap-2 text-xs uppercase tracking-widest font-semibold">
+                                <a href="https://instagram.com/Kittu_the_salon_jaggayyapet" target="_blank" class="text-stone-300 hover:text-[#c5a86b] transition-all">📸 Shop: @Kittu_the_salon_jaggayyapet</a>
+                                <a href="https://instagram.com/Kittu___1996" target="_blank" class="text-stone-300 hover:text-[#c5a86b] transition-all">👤 Personal: @Kittu___1996</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-4 slide-reveal-right h-72 w-full bg-stone-900 border border-stone-800 shadow-inner group overflow-hidden relative">
+                    <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3817.6368603039828!2d80.09508557542726!3d16.89384901683484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3507f1e959cb35%3A0x9ba0901c339924d5!2sKittu&#39;s%20The%20Salon!5e0!3m2!1sen!2sin!4v1779285186390!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                        class="w-full h-full border-0 opacity-70 grayscale contrast-125 transition-all duration-700 group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-101" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 text-stone-500 text-[11px] font-light tracking-wide">
+                <p>© 2026 Kittu's The Salon. All Rights Reserved.</p>
+                <p>Jaggayyapeta, Andhra Pradesh.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-30 animate-float">
+        <button onclick="openBookingModal()" class="bg-[#c5a86b] text-white flex items-center justify-center gap-3 px-6 py-4 shadow-2xl hover:bg-[#1c1b18] hover:text-white transition-all duration-500 font-bold uppercase text-[10px] tracking-[0.2em] border border-white/10 group cursor-pointer">
+            <svg class="w-4 h-4 fill-current group-hover:rotate-12 transition-transform duration-300" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.455L0 24zm6.59-4.846c1.66.986 3.288 1.474 4.803 1.475 5.381 0 9.754-4.31 9.757-9.614.002-2.561-1.002-4.97-2.821-6.79-1.82-1.82-4.232-2.822-6.795-2.824-5.386 0-9.759 4.312-9.763 9.617-.002 1.844.53 3.42 1.542 4.908l-.982 3.58 3.699-.952zm11.332-6.284c-.292-.146-1.727-.853-1.993-.95-.266-.097-.46-.146-.653.146-.193.292-.748.95-.918 1.143-.17.193-.34.218-.632.073-.292-.146-1.234-.454-2.351-1.453-.87-.775-1.457-1.733-1.628-2.025-.17-.292-.018-.45.128-.595.132-.131.292-.34.439-.51.146-.17.195-.292.292-.487.097-.195.048-.365-.024-.511-.073-.146-.653-1.573-.895-2.156-.235-.568-.475-.491-.653-.5-.175-.008-.376-.01-.578-.01-.203 0-.532.076-.81.38-.278.304-1.062 1.039-1.062 2.535s1.088 2.943 1.24 3.14c.152.195 2.142 3.272 5.19 4.587.725.313 1.292.5 1.73.64.73.232 1.393.2 1.917.12.584-.088 1.727-.706 1.972-1.39.244-.683.244-1.267.172-1.39-.072-.121-.266-.194-.559-.34z"/>
+            </svg>
+            <span>Book Appointment</span>
+        </button>
+    </div>
+
+    <div id="bookingModal" class="fixed inset-0 z-50 bg-stone-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white max-w-md w-full p-6 md:p-8 border border-stone-200 relative scale-95 transition-transform duration-300 max-h-[92vh] overflow-y-auto hide-scrollbar" id="modalContainer">
+            <button onclick="closeBookingModal()" class="absolute top-6 right-6 text-stone-400 hover:text-stone-900 text-lg font-light cursor-pointer">✕</button>
+            
+            <div class="text-center mb-6">
+                <span class="text-[9px] uppercase tracking-[0.3em] text-[#c5a86b] font-bold block mb-1">Appointment Form</span>
+                <h3 class="serif text-2xl text-stone-900 font-light">Book Your Service</h3>
+                <div class="w-12 h-[1px] bg-stone-200 mx-auto mt-3"></div>
+            </div>
+
+            <form id="appointmentForm" onsubmit="handleFormSubmission(event)" class="space-y-4">
+                <div>
+                    <label class="text-[9px] uppercase tracking-wider font-bold text-stone-500 block mb-1">Your Name</label>
+                    <input type="text" id="clientName" required class="w-full bg-stone-50 border border-stone-200 px-4 py-2.5 text-sm focus:outline-none focus:border-[#c5a86b] transition-colors rounded-none" placeholder="e.g. Rahul Kumar">
+                </div>
+
+                <div>
+                    <label class="text-[9px] uppercase tracking-wider font-bold text-stone-500 block mb-1">Mobile Number</label>
+                    <input type="tel" id="clientPhone" required class="w-full bg-stone-50 border border-stone-200 px-4 py-2.5 text-sm focus:outline-none focus:border-[#c5a86b] transition-colors rounded-none" placeholder="e.g. 9876543210">
+                </div>
+
+                <div>
+                    <label class="text-[9px] uppercase tracking-wider font-bold text-stone-500 block mb-1">Select Service</label>
+                    <select id="clientService" class="w-full bg-stone-50 border border-stone-200 px-4 py-2.5 text-sm focus:outline-none focus:border-[#c5a86b] transition-colors rounded-none appearance-none">
+                        <option value="Hair Cut">Hair Cut</option>
+                        <option value="Beard Design">Beard Design</option>
+                        <option value="Facial Therapy">Facial Therapy</option>
+                        <option value="Face Scrub">Face Scrub</option>
+                        <option value="Hair Spa">Hair Spa</option>
+                        <option value="Head Wash">Head Wash</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="w-full bg-[#1c1b18] text-white py-3.5 text-[10px] uppercase font-bold tracking-[0.2em] hover:bg-[#c5a86b] transition-colors duration-500 mt-2 rounded-none shadow-sm cursor-pointer">
+                    Confirm & Send on WhatsApp
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const SUPABASE_URL = 'https://acettwudbrawohmfdxzy.supabase.co'; 
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFjZXR0wudYnJhd29obWZkeHp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxNzk1NjQsImV4cCI6MjA5NDc1NTU2NH0.fJFGb3E25W6cxC0D_n7Nv9nlyAg_4VBx5KAdKesODv8';
+        
+        let supabaseClient = null;
+        
+        document.addEventListener("DOMContentLoaded", () => {
+            try {
+                if (typeof supabase !== 'undefined' && SUPABASE_URL) {
+                    supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                }
+            } catch(err) {
+                console.warn("Supabase handshake bypassed safely:", err);
+            }
+        });
+
+        function openBookingModal(defaultService = 'Hair Cut') {
+            const modal = document.getElementById('bookingModal');
+            const container = document.getElementById('modalContainer');
+            document.getElementById('clientService').value = defaultService;
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                container.classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeBookingModal() {
+            const modal = document.getElementById('bookingModal');
+            const container = document.getElementById('modalContainer');
+            
+            modal.classList.add('opacity-0');
+            container.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+        async function handleFormSubmission(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('clientName').value.trim();
+            const phone = document.getElementById('clientPhone').value.trim();
+            const service = document.getElementById('clientService').value;
+
+            // 1. WhatsApp Redirection
+            const message = `Hello, I want to book an appointment.\n\n*Name:* ${name}\n*Mobile:* ${phone}\n*Service:* ${service}`;
+            const whatsappUrl = `https://wa.me/916304656255?text=${encodeURIComponent(message)}`;
+            
+            closeBookingModal();
+            window.open(whatsappUrl, '_blank');
+            document.getElementById('appointmentForm').reset();
+
+            // 2. Database Save (Non-blocking)
+            if (supabaseClient) {
+                supabaseClient
+                    .from('appointments')
+                    .insert([{ name: name, phone: phone, service: service }])
+                    .then(() => console.log("Success"));
+            }
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+            const observerConfiguration = { root: null, rootMargin: "0px 0px -40px 0px", threshold: 0.05 };
+            const scrollRevealCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("active");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+
+            const activeScrollEngine = new IntersectionObserver(scrollRevealCallback, observerConfiguration);
+            document.querySelectorAll(".slide-reveal-left, .slide-reveal-right, .fade-reveal-up").forEach(node => {
+                activeScrollEngine.observe(node);
+            });
+        });
+    </script>
+
+</body>
+</html>
