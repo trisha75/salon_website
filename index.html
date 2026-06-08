@@ -204,7 +204,7 @@ pointer-events:none;
             <a href="#contact" class="hover:text-[#c5a86b] transition-colors duration-300">Location</a>
         </div>
         
-        <button onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})"
+        <button onclick="openBookingModal()"
             class="bg-[#1c1b18] text-white px-7 py-3 text-[10px] uppercase font-bold tracking-widest hover:bg-[#c5a86b] transition-all duration-500">
             Book Appointment
         </button>
@@ -230,6 +230,10 @@ pointer-events:none;
             <h1 class="serif text-5xl md:text-8xl font-light leading-none tracking-tight mb-8 text-white">
                 KITTU'S THE SALON
             </h1>
+
+            <p class="text-stone-200 text-base md:text-xl font-light tracking-wide max-w-xl mx-auto mb-4">
+                SINCE 2015
+            </p> 
         
             <div class="w-24 h-[2px] bg-[#c5a86b] mx-auto mb-8"></div>
         
@@ -247,16 +251,7 @@ pointer-events:none;
             </button>
         
         </div>
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 scroll-wrapper">
-<div class="flex flex-col items-center">
-<span class="text-[10px] uppercase tracking-[0.35em] text-white/70 mb-3">Scroll</span>
-<div class="w-6 h-10 border border-white/40 rounded-full flex justify-center pt-2">
-<div class="w-[3px] h-2 bg-[#c5a86b] rounded-full scroll-indicator"></div>
-</div>
-</div>
-</div>
        
-        
         </header>
         
         <section id="about" class="py-32 px-6 md:px-16 bg-[#fcfbfa] overflow-hidden">
@@ -271,11 +266,11 @@ pointer-events:none;
                         </span>
                 
                         <h2 class="serif text-4xl md:text-6xl text-stone-900 font-light mb-8">
-                            Premium Grooming For Modern Men
+                            Premium Grooming For Men and Children
                         </h2>
                 
                         <p class="text-stone-600 leading-relaxed text-base mb-6">
-                            At Kittu's The Salon, we believe every person deserves to feel stylish,
+                            At Kittu The Salon, we believe every person deserves to feel stylish,
                             confident and handsome.
                         </p>
                 
@@ -291,7 +286,7 @@ pointer-events:none;
                         <div class="bg-white border border-[#e8dcc4] p-6 shadow-sm hover:shadow-2xl hover:-translate-y-4 transition-all duration-700 about-card">
                             <h3 class="text-[#c5a86b] font-bold text-lg mb-2">01</h3>
                             <h4 class="text-stone-900 font-semibold mb-2">
-                                Trained Professionals
+                                Trained Professionals 🎖️
                             </h4>
                             <p class="text-stone-500 text-sm">
                                 Skilled stylists with years of professional experience.
@@ -301,17 +296,17 @@ pointer-events:none;
                         <div class="bg-white border border-[#e8dcc4] p-6 shadow-sm hover:shadow-2xl hover:-translate-y-4 transition-all duration-700 about-card">
                             <h3 class="text-[#c5a86b] font-bold text-lg mb-2">02</h3>
                             <h4 class="text-stone-900 font-semibold mb-2">
-                                Premium Products
+                                Premium Products ❤️
                             </h4>
                             <p class="text-stone-500 text-sm">
-                                L'Oréal Paris and other trusted professional brands.
+                                We trusted professional brands.
                             </p>
                         </div>
                 
                         <div class="bg-white border border-[#e8dcc4] p-6 shadow-sm hover:shadow-2xl hover:-translate-y-4 transition-all duration-700 about-card">
                             <h3 class="text-[#c5a86b] font-bold text-lg mb-2">03</h3>
                             <h4 class="text-stone-900 font-semibold mb-2">
-                                Trusted By 10,000+ Customers
+                                Trusted Customer ⭐️
                             </h4>
                             <p class="text-stone-500 text-sm">
                                 Quality grooming and customer satisfaction every day.
@@ -329,7 +324,7 @@ pointer-events:none;
                 <span class="text-[10px] uppercase tracking-[0.4em] text-[#c5a86b] font-bold block mb-4">What We Do</span>
                 <h2 class="serif text-4xl md:text-6xl text-stone-900 font-light">Our Services</h2>
                 <p class="text-stone-600 text-lg font-light tracking-wide mt-5 max-w-2xl mx-auto leading-relaxed">
-                    Choose from our main menu of grooming options below.
+                    Choose from our main menu.
                 </p>
                 <div class="w-12 h-[1px] bg-stone-300 mx-auto mt-6"></div>
             </div>
@@ -357,17 +352,18 @@ pointer-events:none;
                                 </p>
                             </div>
                         </div>
-                    
-                        <!-- Facial Therapy -->
-                        <div onclick="openBookingModal('Facial Therapy')" class="slide-reveal-left flex-1 bg-white border border-stone-200/80 p-8 text-center flex flex-col items-center justify-between transition-all duration-500 hover:border-[#c5a86b] hover:shadow-xl hover:-translate-y-2 group cursor-pointer service-card">
-                            <div class="w-16 h-16 mx-auto mb-5 rounded-full bg-[#f7f3eb] border border-[#e8dfcf] flex items-center justify-center text-3xl group-hover:bg-[#c5a86b]/10 transition-all duration-500">🧖</div>
+
+                        <!-- Child Haircut -->
+                        <div onclick="openBookingModal('Child Haircut')" class="slide-reveal-right flex-1 bg-white border border-stone-200/80 p-8 text-center flex flex-col items-center justify-between transition-all duration-500 hover:border-[#c5a86b] hover:shadow-xl hover:-translate-y-2 group cursor-pointer service-card">
+                            <div class="w-16 h-16 mx-auto mb-5 rounded-full bg-[#f7f3eb] border border-[#e8dfcf] flex items-center justify-center text-3xl group-hover:bg-[#c5a86b]/10 transition-all duration-500">👦</div>
                             <div>
-                                <h3 class="text-xs uppercase font-bold tracking-widest text-stone-800 mb-2">Facial Treatment</h3>
+                                <h3 class="text-xs uppercase font-bold tracking-widest text-stone-800 mb-2">Child Haircut</h3>
                                 <p class="text-[11px] text-stone-400 font-light leading-relaxed">
-                                    Deep cleansing facials for healthy, glowing skin.
+                                    Comfortable and stylish haircuts specially designed for children.
                                 </p>
                             </div>
                         </div>
+                    
                     
                         <!-- Face Scrub -->
                         <div onclick="openBookingModal('Face Scrub')" class="slide-reveal-right flex-1 bg-white border border-stone-200/80 p-8 text-center flex flex-col items-center justify-between transition-all duration-500 hover:border-[#c5a86b] hover:shadow-xl hover:-translate-y-2 group cursor-pointer service-card">
@@ -402,13 +398,13 @@ pointer-events:none;
                             </div>
                         </div>
                     
-                        <!-- Child Haircut -->
-                        <div onclick="openBookingModal('Child Haircut')" class="slide-reveal-right flex-1 bg-white border border-stone-200/80 p-8 text-center flex flex-col items-center justify-between transition-all duration-500 hover:border-[#c5a86b] hover:shadow-xl hover:-translate-y-2 group cursor-pointer service-card">
-                            <div class="w-16 h-16 mx-auto mb-5 rounded-full bg-[#f7f3eb] border border-[#e8dfcf] flex items-center justify-center text-3xl group-hover:bg-[#c5a86b]/10 transition-all duration-500">👦</div>
+                        <!-- Facial Treatment -->
+                        <div onclick="openBookingModal('Facial Treatment')" class="slide-reveal-left flex-1 bg-white border border-stone-200/80 p-8 text-center flex flex-col items-center justify-between transition-all duration-500 hover:border-[#c5a86b] hover:shadow-xl hover:-translate-y-2 group cursor-pointer service-card">
+                            <div class="w-16 h-16 mx-auto mb-5 rounded-full bg-[#f7f3eb] border border-[#e8dfcf] flex items-center justify-center text-3xl group-hover:bg-[#c5a86b]/10 transition-all duration-500">🧖</div>
                             <div>
-                                <h3 class="text-xs uppercase font-bold tracking-widest text-stone-800 mb-2">Child Haircut</h3>
+                                <h3 class="text-xs uppercase font-bold tracking-widest text-stone-800 mb-2">Facial Treatment</h3>
                                 <p class="text-[11px] text-stone-400 font-light leading-relaxed">
-                                    Comfortable and stylish haircuts specially designed for children.
+                                    Deep cleansing facials for healthy, glowing skin.
                                 </p>
                             </div>
                         </div>
@@ -543,7 +539,7 @@ pointer-events:none;
                             <span class="text-amber-400 text-sm">★★★★★</span>
                         </div>
                         <p class="text-stone-500 font-light text-sm italic leading-relaxed">
-                            "Very clean shop and good service. The razor lining for my beard was perfectly neat and sharp."
+                            "Very clean salon and good service. The razor lining for my beard was perfectly neat and sharp."
                         </p>
                         <span class="text-[10px] text-stone-600 uppercase tracking-widest block mt-4 font-medium">Regular Customer</span>
                     </div>
@@ -607,10 +603,10 @@ pointer-events:none;
                     <div class="space-y-4 text-sm font-light">
                         <div>
                             <span class="text-stone-500 text-xs block mb-0.5">Phone & UPI Number</span>
-                            <a href="tel:+916304656255" class="text-[#e2d1b3] font-medium text-base hover:underline">+91 63046 56255</a>
+                            <a href="tel:+919160388575" class="text-[#e2d1b3] font-medium text-base hover:underline">+91 91603 88575</a>
                         </div>
                         <div>
-                            <span class="text-stone-500 text-xs block mb-0.5">Shop Timings</span>
+                            <span class="text-stone-500 text-xs block mb-0.5">Salon Timings</span>
                             <p class="text-stone-600">7:30 AM — 9:30 PM (Open Everyday)</p>
                         </div>
                         <div>
@@ -622,8 +618,23 @@ pointer-events:none;
                         <div>
                             <span class="text-stone-500 text-xs block mb-1">Follow Us</span>
                             <div class="flex flex-col gap-2 text-xs uppercase tracking-widest font-semibold">
-                                <a href="https://instagram.com/Kittu_the_salon_jaggayyapet" target="_blank" class="text-stone-600 hover:text-[#c5a86b] transition-all">📸 Shop: @Kittu_the_salon_jaggayyapet</a>
-                                <a href="https://instagram.com/Kittu____1996" target="_blank" class="text-stone-600 hover:text-[#c5a86b] transition-all">👤 Personal: @Kittu____1996</a>
+                                <a href="https://instagram.com/Kittu_the_salon_jaggayyapet"
+                                target="_blank"
+                                class="flex items-center gap-2 hover:text-[#c5a86b] transition-all duration-300">
+                                
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                width="18"
+                                height="18"
+                                fill="currentColor"
+                                viewBox="0 0 24 24">
+                                
+                                <path d="M7.75 2C4.574 2 2 4.574 2 7.75v8.5C2 19.426 4.574 22 7.75 22h8.5C19.426 22 22 19.426 22 16.25v-8.5C22 4.574 19.426 2 16.25 2h-8.5zm0 2h8.5A3.75 3.75 0 0 1 20 7.75v8.5A3.75 3.75 0 0 1 16.25 20h-8.5A3.75 3.75 0 0 1 4 16.25v-8.5A3.75 3.75 0 0 1 7.75 4zm8.75 1a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
+                                </svg>
+                                
+                                <span>salon: @Kittu_the_salon_jaggayyapet</span>
+                                
+                                </a>
+                                <a href="https://instagram.com/Kittu____1996" target="_blank" class="text-stone-600 hover:text-[#c5a86b] transition-all">👤  Personal: @Kittu____1996</a>
                             </div>
                         </div>
                     </div>
@@ -687,9 +698,9 @@ pointer-events:none;
                         <option value="Face Scrub">Face Scrub</option>
                         <option value="Hair Spa">Hair Spa</option>
                         <option value="Head Wash">Head Wash</option>
-<option value="Child Haircut">Child Haircut</option>
-<option value="Face Steam">Face Steam</option>
-<option value="Detan">Detan</option>
+                        <option value="Child Haircut">Child Haircut</option>
+                        <option value="Face Steam">Face Steam</option>
+                        <option value="Detan">Detan</option>
                     </select>
                 </div>
 
@@ -748,7 +759,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // 1. WhatsApp Redirection
             const message = `Hello, I want to book an appointment.\n\n*Name:* ${name}\n*Mobile:* ${phone}\n*Service:* ${service}`;
-            const whatsappUrl = `https://wa.me/916304656255?text=${encodeURIComponent(message)}`;
+            const whatsappUrl = `https://wa.me/919160388575?text=${encodeURIComponent(message)}`;
             
             closeBookingModal();
             window.open(whatsappUrl, '_blank');
